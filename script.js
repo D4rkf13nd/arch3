@@ -1,5 +1,5 @@
 const quizData = [
-{
+ {
     question: "AA pipe fitting installed close to the ground on the exterior of a building, providing two or move connections through which the fire department can pump water to a standpipe or sprinkler system",
     answer: "SIAMESE"
 },
@@ -174,17 +174,72 @@ function sendAnswer(questionIndex) {
     const qIdx = quizOrder[questionIndex];
     const userAnswer = input.value.trim().toLowerCase();
     const correctAnswer = quizData[qIdx].answer.trim().toLowerCase();
+        // Accept alternate answer for SMOKEPROOF ENCLOSURE  
+        let isCorrect = false;
+        if (correctAnswer === 'smokeproof enclosure') {
+            if (userAnswer === 'smoke proof enclosure') {
+                isCorrect = true;
+            }
+        }
+        // Accept alternate answers for DRY-PIPE SYSTEM 
+        if (correctAnswer === 'dry-pipe system') {
+            if (userAnswer === 'dry pipe system') {
+                isCorrect = true;
+            }
+        }
+        // Accept alternate answers for WET-PIPE SYSTEM 
+        if (correctAnswer === 'wet-pipe system') {
+            if (userAnswer === 'wet pipe system') {
+                isCorrect = true;
+            }
+        }
+        // Accept alternate answers for FIRE-RESISTANCE RATING
+        if (correctAnswer === 'fire-resistance rating') {
+            if (userAnswer === 'fire resistance rating') {
+                isCorrect = true;
+            }
+        }
+        // Accept alternate answers for FIRE-DETECTION SYSTEM 
+        if (correctAnswer === 'fire-detection system') {
+            if (userAnswer === 'fire detection system') {
+                isCorrect = true;
+            }
+        }
+        // Accept alternate answers for FUEL-CONTRIBUTION RATING 
+        if (correctAnswer === 'fuel-contribution rating') {
+            if (userAnswer === 'fuel contribution rating') {
+                isCorrect = true;
+            }
+        }
+            // Accept alternate answers for SPRAY-ON FIREPROOFING
+            if (correctAnswer === 'spray-on fireproofing') {
+                if (userAnswer === 'spray on fireproofing' || userAnswer === 'spray on fire proofing') {
+                    isCorrect = true;
+                }
+            }
+            // Accept alternate answers for SPRAY-ON FIREPROOFING
+            if (correctAnswer === 'spray-on fireproofing') {
+                if (userAnswer === 'spray on fireproofing' || userAnswer === 'spray on fire proofing') {
+                    isCorrect = true;
+                }
+            }
+            // Accept alternate answers for FIREPROOFING 
+            if (correctAnswer === 'fireproofing') {
+                if (userAnswer === 'fire proofing') {
+                    isCorrect = true;
+                }
+            }
     if (userAnswer !== "") {
         input.disabled = true;
-        if (userAnswer === correctAnswer) {
-            feedbackEl.textContent = 'Correct!';
-            feedbackEl.style.color = '#2e7d32';
-            input.classList.add('correct');
-        } else {
-            feedbackEl.textContent = `Incorrect. Correct answer: ${quizData[qIdx].answer}`;
-            feedbackEl.style.color = '#c62828';
-            input.classList.add('wrong');
-        }
+            if (userAnswer === correctAnswer || userAnswer.replace(/\s+/g, " ") === correctAnswer.replace(/\s+/g, " ") || isCorrect) {
+                feedbackEl.textContent = 'Correct!';
+                feedbackEl.style.color = '#2e7d32';
+                input.classList.add('correct');
+            } else {
+                feedbackEl.textContent = `Incorrect. Correct answer: ${quizData[qIdx].answer}`;
+                feedbackEl.style.color = '#c62828';
+                input.classList.add('wrong');
+            }
         setTimeout(() => {
             if (questionIndex < quizData.length - 1) {
                 const questions = document.querySelectorAll('.question-container');
@@ -195,13 +250,6 @@ function sendAnswer(questionIndex) {
                 // Focus the next input if not already answered
                 const nextInput = document.getElementById(`input-${currentQuestion}`);
                 if (nextInput && !nextInput.disabled) nextInput.focus();
-            } else {
-                // On last question, ensure submit button is visible and enabled
-                const submitBtn = document.querySelector('.submit-btn');
-                if (submitBtn) {
-                    submitBtn.style.display = 'block';
-                    submitBtn.disabled = false;
-                }
             }
         }, 500);
     } else {
@@ -219,16 +267,59 @@ function checkAnswers() {
         const userAnswer = (input ? input.value.trim().toLowerCase() : "");
         const qIdx = quizOrder[index];
         const correctAnswer = quizData[qIdx].answer.trim().toLowerCase();
+            // Accept alternate answer for LIQUID-FILLED COLUMN
+            let isCorrect = false;
+            if (correctAnswer === 'liquid-filled column') {
+                if (userAnswer === 'liquid filled column') {
+                    isCorrect = true;
+                }
+            }
+            // Accept alternate answers for SMOKE-DEVELOPED RATING
+            if (correctAnswer === 'smoke-developed rating') {
+                if (userAnswer === 'smoke developed rating') {
+                    isCorrect = true;
+                }
+            }
+            // Accept alternate answers for FIRE-RATED
+            if (correctAnswer === 'fire-rated') {
+                if (userAnswer === 'fire rated') {
+                    isCorrect = true;
+                }
+            }
+            // Accept alternate answers for FIRE-RESISTANCE RATING
+            if (correctAnswer === 'fire-resistance rating') {
+                if (userAnswer === 'fire resistance rating') {
+                    isCorrect = true;
+                }
+            }
+            // Accept alternate answers for FLAME-SPREAD RATING
+            if (correctAnswer === 'flame-spread rating') {
+                if (userAnswer === 'flame spread rating') {
+                    isCorrect = true;
+                }
+            }
+            // Accept alternate answers for SPRAY-ON FIREPROOFING 
+            if (correctAnswer === 'spray-on fireproofing') {
+                if (userAnswer === 'spray on fireproofing') {
+                    isCorrect = true;
+                }
+            }
+            // Accept alternate answers for FIREPROOFING 
+            if (correctAnswer === 'fireproofing') {
+                if (userAnswer === 'fire proofing') {
+                    isCorrect = true;
+                }
+            }
         input.disabled = true;
         const feedbackEl = document.getElementById(`feedback-${index}`);
-        if (userAnswer === correctAnswer) {
-            score++;
-            feedbackEl.textContent = 'Correct!';
-            feedbackEl.style.color = '#2e7d32';
-        } else {
-            feedbackEl.textContent = `Incorrect. Correct answer: ${quizData[qIdx].answer}`;
-            feedbackEl.style.color = '#c62828';
-        }
+            if (userAnswer === correctAnswer || userAnswer.replace(/\s+/g, " ") === correctAnswer.replace(/\s+/g, " ") || isCorrect) {
+                score++;
+                feedbackEl.textContent = 'Correct!';
+                feedbackEl.style.color = '#2e7d32';
+            } else {
+                feedbackEl.textContent = `Incorrect. Correct answer: ${quizData[qIdx].answer}`;
+                feedbackEl.style.color = '#c62828';
+            }
     });
 
     // Hide all questions
